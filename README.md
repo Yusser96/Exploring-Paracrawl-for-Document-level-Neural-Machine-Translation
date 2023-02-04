@@ -1,6 +1,6 @@
 # G-Transformer
 
-**This code is for EACL 2023 paper [Exploring Paracrawl for Document-level Neural Machine Translation](https://aclanthology.org/2021.acl-long.267/).**
+**This code is for EACL 2023 paper [Exploring Paracrawl for Document-level Neural Machine Translation](https://aclanthology.org/).**
 
 
 
