@@ -18,22 +18,6 @@ Please also follow the readmes under folder raw_data and mbart.cc25 to download 
 
 ## Non-pretraining Settings
 
-### G-Transformer random initialized
-* Prepare data: 
-```
-    mkdir exp_randinit
-    bash exp_gtrans/run-all.sh prepare-randinit exp_randinit
-```
-
-* Train model:
-```
-    CUDA_VISIBLE_DEVICES=0,1,2,3 bash exp_gtrans/run-all.sh run-randinit train exp_randinit
-```
-
-* Evaluate model:
-```
-    bash exp_gtrans/run-all.sh run-randinit test exp_randinit
-```
 
 ### G-Transformer fine-tuned on sent Transformer
 * Prepare data: 
@@ -52,20 +36,4 @@ Please also follow the readmes under folder raw_data and mbart.cc25 to download 
     bash exp_gtrans/run-all.sh run-finetune test exp_finetune
 ```
 
-## Pretraining Settings
-### G-Transformer fine-tuned on mBART25
-* Prepare data: 
-```
-    mkdir exp_mbart
-    bash exp_gtrans/run-all.sh prepare-mbart exp_mbart
-```
 
-* Train model:
-```
-    CUDA_VISIBLE_DEVICES=0,1,2,3 bash exp_gtrans/run-all.sh run-mbart train exp_mbart
-```
-
-* Evaluate model:
-```
-    bash exp_gtrans/run-all.sh run-mbart test exp_mbart
-```
