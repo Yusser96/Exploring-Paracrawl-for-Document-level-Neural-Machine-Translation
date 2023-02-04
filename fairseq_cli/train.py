@@ -118,10 +118,13 @@ def main(args, init_distributed=False):
     # Train until the learning rate gets too small
     max_epoch = args.max_epoch or math.inf
     lr = trainer.get_lr()
+
     train_meter = meters.StopwatchMeter()
     train_meter.start()
+    # epoch = 0
     while lr > args.min_lr and epoch_itr.next_epoch_idx <= max_epoch:
         # train for one epoch
+        # epoch +=1
         valid_losses, should_stop = train(args, trainer, task, epoch_itr)
         if should_stop:
             break
@@ -212,6 +215,9 @@ def train(args, trainer, task, epoch_itr):
     valid_subsets = args.valid_subset.split(",")
     should_stop = False
     for i, samples in enumerate(progress):
+        if (epoch_itr.epoch * i > 100000 and epoch_itr.epoch == 5) or (epoch_itr.epoch * i > 200000 and epoch_itr.epoch == 10):
+            should_stop = True
+            break
         with metrics.aggregate("train_inner"), torch.autograd.profiler.record_function("train_step-%d" % i):
             log_output = trainer.train_step(samples)
             if log_output is None:  # OOM, overflow, ...
@@ -366,6 +372,7 @@ def cli_main_helper(args):
     elif args.distributed_world_size > 1:
         if not getattr(args, "tpu", False):
             # fallback for single node with multiple GPUs
+            print('fallback for single node with multiple GPUs')
             assert args.distributed_world_size <= torch.cuda.device_count()
             port = random.randint(10000, 20000)
             args.distributed_init_method = "tcp://localhost:{port}".format(port=port)
@@ -382,6 +389,7 @@ def cli_main_helper(args):
             )
     else:
         # single GPU training
+        print('single GPU training')
         main(args)
 
 
