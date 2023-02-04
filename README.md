@@ -1,12 +1,14 @@
 # G-Transformer
 
-**This code is for ACL 2021 paper [G-Transformer for Document-level Machine Translation](https://aclanthology.org/2021.acl-long.267/).**
+**This code is for EACL 2023 paper [Exploring Paracrawl for Document-level Neural Machine Translation](https://aclanthology.org/2021.acl-long.267/).**
+
+
 
 **Python Version**: Python3.6
 
 **Package Requirements**: torch==1.4.0 tensorboardX numpy==1.19.0
 
-**Framework**: Our model and experiments are built upon [fairseq](https://github.com/pytorch/fairseq). We use a [snapshot version]( https://drive.google.com/file/d/1UJmZn9LXPvOoifVKblt0RhUFsZRusOrt/view?usp=sharing ) between 0.9.0 and 1.10.0 as our initial code.
+**Framework**: Our model and experiments are built upon [G-Transformer](https://github.com/baoguangsheng/g-transformer).
 
 
 Before running the scripts, please install fairseq dependencies by:
