@@ -29,6 +29,7 @@ Please also follow the readmes under folder raw_data and mbart.cc25 to download 
 
 * Extract Data:
 ```
+    cd data_scripts
     bash readme.sh
 ```
 
