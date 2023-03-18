@@ -1,0 +1,26 @@
+import sys
+
+def mread(file):
+    fi=open(file,'r',encoding='UTF8')
+    li=fi.readlines()
+    fi.close()
+    return li
+
+                    
+li=mread(sys.argv[1])    
+   
+fo=open(sys.argv[1]+'.oneline','w',encoding='UTF8')
+
+for i in range(len(li)):
+    fo.write(li[i].strip())
+    if i==len(li)-1 or li[i+1].strip()=='<d>':
+        fo.write("\n")
+    else:
+        fo.write('<spzjy>')
+
+fo.close()
+
+
+
+
+

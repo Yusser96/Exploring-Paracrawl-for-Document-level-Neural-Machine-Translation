@@ -1,0 +1,25 @@
+import sys
+
+def mread(file):
+    fi=open(file,'r',encoding='UTF8')
+    li=fi.readlines()
+    fi.close()
+    return li
+
+
+
+                    
+li=mread(sys.argv[1])    
+   
+fo=open(sys.argv[1]+'.multiline','w',encoding='UTF8')
+
+for i in range(len(li)):
+    
+    
+   
+        toks=li[i].split('<spzjy>')
+        for j in range(len(toks)):
+             fo.write(toks[j].strip()+"\n")
+
+fo.close()
+

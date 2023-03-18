@@ -1,0 +1,61 @@
+import sys
+
+def mread(file):
+    fi=open(file,'r',encoding='UTF8')
+    li=fi.readlines()
+    fi.close()
+    return li
+
+def getidx(bp,leng):
+    for i in range(len(bp)) :
+        if leng<bp[i]:return i
+    return 9
+                 
+def printbatch(list,ls,lt,fos,fot):
+    dict={}
+    for i in range(len(list)):
+        key=ls[list[i]].strip()
+        if not key in dict:
+            dict[key]='done'
+            fos.write(ls[list[i]])
+            fot.write(lt[list[i]])
+    return 'done'
+
+ls=mread(sys.argv[1])    
+lt=mread(sys.argv[2])
+   
+fos=open(sys.argv[1]+'.uniq','w',encoding='UTF8')
+fot=open(sys.argv[2]+'.uniq','w',encoding='UTF8')
+
+
+list=[]
+for i in range(len(ls)):
+    list.append(len(ls[i].strip()))
+
+list.sort()
+bp=[]
+onesize=len(list)//10
+for i in range(9): bp.append(list[(i+1)*onesize])
+
+batch=[]
+for i in range(10): batch.append([])
+for i in range(len(ls)): batch[getidx(bp,len(ls[i].strip()))].append(i)
+
+
+
+
+
+
+
+
+
+
+
+
+for i in range(10):
+    print(len(batch[i]))
+    printbatch(batch[i],ls,lt,fos,fot)
+    
+fos.close()
+fot.close()
+

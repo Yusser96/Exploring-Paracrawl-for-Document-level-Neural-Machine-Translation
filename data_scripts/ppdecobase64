@@ -1,0 +1,123 @@
+import base64
+import sys
+
+def mread(file):
+    fi=open(file,'r',encoding='UTF8')
+    li=fi.readlines()
+    fi.close()
+    return li
+
+
+
+
+
+
+def getidx(dsrc):
+    r=[]
+    r_rev=[]
+    last=0
+    c=0
+    for i in range(len(dsrc)):
+        if dsrc[i]=="\n":
+            c+=1
+            
+            r_rev.append([last,i-1])
+            last=i+1
+        r.append(c)
+    
+    return r,r_rev
+
+
+
+
+def editflag(fsrc, csrc, ctgt, bsrc, lsrc, btgt, ltgt):
+    if len(fsrc[csrc])==1 and fsrc[csrc][0]=='none':
+        fsrc[csrc]=[ctgt, str(bsrc), str(lsrc), str(btgt), str(ltgt)]
+    else:
+        if len(fsrc[csrc])==1 and fsrc[csrc][0]=='multi':
+            return 'done'
+        else:
+            if ctgt!=fsrc[csrc][0]:
+                fsrc[csrc]=['multi']
+            else:
+                fsrc[csrc].extend([str(bsrc), str(lsrc), str(btgt),str(ltgt)])
+    return 'done'
+                    
+ld=mread(sys.argv[1])    
+ls=mread(sys.argv[2])
+fos=open(sys.argv[1]+'.src','w',encoding='UTF8')
+fot=open(sys.argv[1]+'.tgt','w',encoding='UTF8')
+foa=open(sys.argv[1]+'.align','w',encoding='UTF8')
+i=0
+j=0
+
+
+
+
+
+
+while True:
+    if i==len(ld):break
+    if j==len(ls):break
+    toks=ld[i].split('\t')
+    
+    dsrc=base64.b64decode(toks[3].strip()).decode('utf-8')+"\n"
+    
+    dtgt=base64.b64decode(toks[4].strip()).decode('utf-8')+"\n"
+    isrc, isrc_rev=getidx(dsrc)
+    itgt, itgt_rev=getidx(dtgt)
+    
+    dsrc=dsrc.replace("\n", ' ')  
+    dtgt=dtgt.replace("\n", ' ')  
+    fsrc=[]
+    ftgt=[]
+    
+    for k in range(len(isrc_rev)):fsrc.append(['none'])
+    for k in range(len(itgt_rev)):ftgt.append(['none'])
+
+    
+    usrc=toks[1].strip()
+    utgt=toks[2].strip()
+    
+    bsrc=0
+    btgt=0
+   
+
+ 
+    while True:
+              
+       if j==len(ls) :break  
+
+       toks=ls[j].split('\t')    
+       if toks[0].strip()== usrc and toks[1].strip()==utgt :
+         
+           lsrc= len(toks[2].strip())
+           ltgt= len(toks[3].strip())           
+           bsrc=dsrc.find(toks[2].strip(),  bsrc)
+           btgt=dtgt.find(toks[3].strip(),  btgt)
+           
+           if isrc[bsrc]==isrc[bsrc+lsrc-1] and itgt[btgt]==itgt[btgt+ltgt-1]:
+               editflag(fsrc, isrc[bsrc], itgt[btgt], bsrc-isrc_rev[isrc[bsrc]][0], lsrc, btgt-itgt_rev[itgt[btgt]][0], ltgt)
+               editflag(ftgt, itgt[btgt], isrc[bsrc], btgt-itgt_rev[itgt[btgt]][0], ltgt, bsrc-isrc_rev[isrc[bsrc]][0], lsrc)
+           bsrc+=lsrc
+           btgt+=ltgt
+           j+=1               
+       else:     
+                                   
+           i+=1
+           break
+           
+
+    for k in range(len(fsrc)):
+         if len(fsrc[k])>5: 
+             if len(ftgt[fsrc[k][0]])>5 :
+                 fos.write(dsrc[isrc_rev[k][0]:isrc_rev[k][1]+1]+"\n")
+                 tempt=fsrc[k][0]
+                 fot.write(dtgt[itgt_rev[tempt][0]:itgt_rev[tempt][1]+1]+"\n")
+                 foa.write(' '.join(fsrc[k][1:])+"\n")                 
+
+fos.close()
+fot.close()
+foa.close()
+
+

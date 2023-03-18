@@ -1,0 +1,32 @@
+import sys
+
+def mread(file):
+    fi=open(file,'r',encoding='UTF8')
+    li=fi.readlines()
+    fi.close()
+    return li
+
+                    
+ls=mread(sys.argv[1])    
+lt=mread(sys.argv[2])
+la=mread(sys.argv[3])   
+fos=open(sys.argv[1]+'.parasent','w',encoding='UTF8')
+fot=open(sys.argv[2]+'.parasent','w',encoding='UTF8')
+
+for i in range(len(ls)):
+    toks=la[i].strip().split(' ')
+    fos.write("<d>\n")
+    fot.write("<d>\n")
+    for j in range(len(toks)//4):
+        bsrc=int(toks[j*4])
+        lsrc=int(toks[j*4+1])
+        btgt=int(toks[j*4+2])
+        ltgt=int(toks[j*4+3])
+
+        fos.write(ls[i][bsrc:bsrc+lsrc].strip()+"\n")
+        fot.write(lt[i][btgt:btgt+ltgt].strip()+"\n")
+fos.close()
+fot.close()
+
+
+

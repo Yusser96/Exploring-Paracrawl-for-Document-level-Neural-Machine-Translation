@@ -1,0 +1,22 @@
+import sys
+
+    
+fi=open(sys.argv[1],'r',encoding='UTF8')
+    
+
+
+
+fod=open(sys.argv[1]+'.one.'+sys.argv[2],'w',encoding='UTF8')
+
+
+key='http://www.'+sys.argv[2]
+
+for line in fi:
+    if line.split('\t')[1].strip()[:12]==key:
+        fod.write(line)
+        
+
+
+fod.close()
+
+

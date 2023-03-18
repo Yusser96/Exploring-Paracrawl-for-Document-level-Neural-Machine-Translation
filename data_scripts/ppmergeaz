@@ -1,0 +1,22 @@
+
+import sys
+
+def mread(file):
+    fi=open(file,'r',encoding='UTF8')
+    li=fi.readlines()
+    fi.close()
+    return li
+
+
+  
+fo=open(sys.argv[1]+sys.argv[2]+'.merge','w',encoding='UTF8')
+
+list='abcdefg'+'hijklmn'+'opq'+'rst'+'uvw'+'xyz'
+
+
+for i in range(len(list)):
+    li=mread(sys.argv[1]+list[i]+sys.argv[2])
+    for j in range(len(li)):
+        fo.write(li[j])
+fo.close()
+

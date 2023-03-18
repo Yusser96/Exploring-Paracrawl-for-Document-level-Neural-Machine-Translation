@@ -1,0 +1,49 @@
+import random
+import sys
+
+def mread(file):
+    fi=open(file,'r',encoding='UTF8')
+    li=fi.readlines()
+    fi.close()
+    return li
+
+                    
+ls=mread(sys.argv[1])    
+lt=mread(sys.argv[2])
+
+fos=open(sys.argv[1]+'.train','w',encoding='UTF8')
+fot=open(sys.argv[2]+'.train','w',encoding='UTF8')
+fos_test=open(sys.argv[1]+'.test','w',encoding='UTF8')
+fot_test=open(sys.argv[2]+'.test','w',encoding='UTF8')
+
+fos_dev=open(sys.argv[1]+'.dev','w',encoding='UTF8')
+fot_dev=open(sys.argv[2]+'.dev','w',encoding='UTF8')
+
+
+
+for i in range(1000):
+    idx=int(random.random()*len(ls))
+    fos_test.write(ls[idx])
+    fot_test.write(lt[idx])
+    del ls[idx]
+    del lt[idx]
+
+
+for i in range(1000):
+    idx=int(random.random()*len(ls))
+    fos_dev.write(ls[idx])
+    fot_dev.write(lt[idx])
+    del ls[idx]
+    del lt[idx]
+
+for i in range(len(ls)):
+    fos.write(ls[i])
+    fot.write(lt[i])
+
+fos_test.close()
+fot_test.close()
+fos_dev.close()
+fot_dev.close()
+fos.close()
+fot.close()
+

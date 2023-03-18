@@ -1,0 +1,77 @@
+import sys
+import base64
+
+
+
+
+
+def mread(file):
+    fi=open(file,'r',encoding='UTF8')
+    li=fi.readlines()
+    fi.close()
+    return li
+
+def issame(one,all):
+    one=one.replace("\n",' ')
+    b=0
+    for i in range(len(all)):
+        b=one.find(all[i].strip(),b)
+        if b==-1:return False
+        b+=len(all[i].strip())
+    return True
+
+def getcontain(ld,list,alls,allt):
+    for i in range(len(list)):
+        toks=ld[list[i]].split('\t')    
+        dsrc=base64.b64decode(toks[3].strip()).decode('utf-8')    
+        dtgt=base64.b64decode(toks[4].strip()).decode('utf-8')        
+        if issame(dsrc,alls) and issame(dtgt,allt): return list[i]
+    return 'error'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+ld=mread(sys.argv[1])    
+ls=mread(sys.argv[2])
+fod=open(sys.argv[1]+'.clean','w',encoding='UTF8')
+fos=open(sys.argv[2]+'.clean','w',encoding='UTF8')
+dict={}
+for i in range(len(ld)):
+    toks=ld[i].split('\t')
+    key=toks[1].strip()+'\t'+toks[2].strip()
+    if not key in dict:dict[key]=[i]
+    else:dict[key].append(i)
+i=0
+while True:
+    if i==len(ls):break
+    toks=ls[i].split('\t')
+    key=toks[0].strip()+'\t'+toks[1].strip()    
+    all=[]
+    alls=[]
+    allt=[]
+    while ls[i].split('\t')[0].strip()+'\t'+ls[i].split('\t')[1].strip()==key:  
+        all.append(i)
+        alls.append(ls[i].split('\t')[2].strip())
+        allt.append(ls[i].split('\t')[3].strip())
+        i+=1
+        if i==len(ls):break                                       
+    if key in dict:
+        r= getcontain(ld,dict[key],alls, allt)
+        if r!='error':
+            fod.write(ld[r])
+            for j in range(len(all)):
+                fos.write(ls[all[j]])                
+fos.close()
+fod.close()

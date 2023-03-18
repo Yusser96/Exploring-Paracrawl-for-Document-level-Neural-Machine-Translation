@@ -1,0 +1,27 @@
+import sys
+
+    
+fi=open(sys.argv[1],'r',encoding='UTF8')
+        
+
+fos=open(sys.argv[1]+'.notaztwo','w',encoding='UTF8')
+
+
+list='abcdefg'+'hijklmn'+'opq'+'rst'+'uvw'+'xyz'
+
+key='http://www.'
+keytwo='http://'
+dict={}
+
+for i in range(len(list)):
+    dict[key+list[i]]='done'
+    dict[keytwo+list[i]]='done'
+
+for line in fi:
+
+    if not line.strip()[:8] in dict:
+        if not line.strip()[:12] in dict:
+            if len(line.split('\t'))==5:
+                fos.write(line.strip()+"\n")        
+fos.close()
+
