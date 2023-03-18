@@ -20,6 +20,10 @@ Please also follow the readmes under folder raw_data and mbart.cc25 to download 
 
 ## Data Extraction
 
+we provided the final dataset we used in the paper is in the raw_data folder. 
+
+for reaxtracting the data you can follow the instruction below: 
+
 * download and extract Paracrawl datafiles into data_Scripts directory: 
 
    https://www.statmt.org/paracrawl-benchmarks/paracrawl-benchmark.en-de.aligned-docs.xz
