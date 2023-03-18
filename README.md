@@ -22,9 +22,9 @@ Please also follow the readmes under folder raw_data and mbart.cc25 to download 
 
 * download and extract Paracrawl datafiles into data_Scripts directory: 
 
-   ** https://www.statmt.org/paracrawl-benchmarks/paracrawl-benchmark.en-de.aligned-docs.xz
+   https://www.statmt.org/paracrawl-benchmarks/paracrawl-benchmark.en-de.aligned-docs.xz
    
-   ** https://www.statmt.org/paracrawl-benchmarks/paracrawl-benchmark.en-de.vecalign.xz
+   https://www.statmt.org/paracrawl-benchmarks/paracrawl-benchmark.en-de.vecalign.xz
 
 
 * Extract Data:
