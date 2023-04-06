@@ -20,7 +20,7 @@ Please also follow the readmes under folder raw_data and mbart.cc25 to download 
 
 ## Data Extraction
 
-we provided the final dataset we used in the paper is in the raw_data folder. 
+we provided the final dataset we used in the paper in the raw_data folder. 
 
 for re-extracting the data you can follow the instruction below: 
 
@@ -31,11 +31,21 @@ for re-extracting the data you can follow the instruction below:
    https://www.statmt.org/paracrawl-benchmarks/paracrawl-benchmark.en-de.vecalign.xz
 
 
-* Extract Data:
+* Split the Data:
+we split the two data files by alphabet using first letter of the web domain. we handle two cases where the webdomain start with "http://" or "http://www." 
+
+starting with "http://"
 ```
     cd data_scripts
-    bash readme.sh
+    
+    vecalign=data/paracrawl-benchmark.en-de.vecalign
+    docs=data/paracrawl-benchmark.en-de.aligned-docs
+
+    ./ddd.sh ppgetonesentwww $vecalign
+    ./ddd.sh ppgetonedocuwww $docs
 ```
+
+
 
 
 ## training Settings
