@@ -87,7 +87,7 @@ after the previous step we need to merge the data from the last two steps
     python ppmergeaz $docs.one. .clean.align
 ```
 
-now we handle the case where webdomains start with other prefix than "http://" and "http://www."
+now we handle the case where webdomains start with non alphabit letter with either prefix "http://" or "http://www."
 ```
     python ppgetonedocuothers $docs
     python ppgetonesentothers $vecalign
