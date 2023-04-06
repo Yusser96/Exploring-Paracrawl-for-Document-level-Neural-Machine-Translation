@@ -56,9 +56,9 @@ after it finished we need to clean and decode the data files in parallel
 
 then we merge the data files and split the data by "http://"
 ```
-    python ppmergeaz $docs2.one. .clean.src
-    python ppmergeaz $docs2.one. .clean.tgt
-    python ppmergeaz $docs2.one. .clean.align
+    python ppmergeaz $docs.one. .clean.src
+    python ppmergeaz $docs.one. .clean.tgt
+    python ppmergeaz $docs.one. .clean.align
 ```
 
 ```
