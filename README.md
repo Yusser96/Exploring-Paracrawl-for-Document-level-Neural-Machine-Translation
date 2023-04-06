@@ -32,6 +32,7 @@ for re-extracting the data you can follow the instruction below:
 
 
 * Extract the Data:
+
 in order to run the cleaning process faster we split the data by alphabit to run the cleaning scripts in parallel. we handled afew cases when dealing with the data we will explain next:
 
 we split the two data files by alphabet using first letter of the web domain. we handle three cases where the webdomain start with "http://" or "http://www." or other
