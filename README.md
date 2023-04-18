@@ -33,87 +33,25 @@ for re-extracting the data you can follow the instruction below:
 
 * Extract the Data:
 
-in order to run the cleaning process faster we split the data by alphabit to run the cleaning scripts in parallel. we handled afew cases when dealing with the data we will explain next:
+the scripts are desined to runn in parallel. 
 
-we split the two data files by alphabet using first letter of the web domain. we handle three cases where the webdomain start with "http://" or "http://www." or other
-
-starting with "http://www." this will run 26 processes in parallel 
 ```
     cd data_scripts
     
-    vecalign=data/paracrawl-benchmark.en-de.vecalign
-    docs=data/paracrawl-benchmark.en-de.aligned-docs
-
-    ./ddd.sh ppgetonesentwww $vecalign
-    ./ddd.sh ppgetonedocuwww $docs
+    bash extract_data.sh
 ```
 
-after it finished we need to clean and decode the data files in parallel
-```
-    ./para.sh clean.sh 
-    ./para.sh deco.sh
-```
+* Clean the Data:
 
-then we merge the data files and split the data by "http://"
-```
-    python ppmergeaz $docs.one. .clean.src
-    python ppmergeaz $docs.one. .clean.tgt
-    python ppmergeaz $docs.one. .clean.align
-```
+the scripts are desined to runn in parallel. 
 
 ```
-    ./ddd.sh ppgetonesent $vecalign
-    ./ddd.sh ppgetonedocu $docs 
+    cd data_scripts
+    
+    bash clean_data.sh
 ```
 
-we delete the data that start with w. because it is already included in the previous step:
-```
-    rm $vecalign.one.w
-    rm $docs.one.w
-```
 
-now we need to clean the new extracted data in parallel 
-```
-    ./para.sh clean.sh 
-    ./para.sh deco.sh
-```
-after the previous step we need to merge the data from the last two steps
-```
-    mv $docs2.one..clean.src.merge $docs.one.w.clean.src
-    mv $docs2.one..clean.tgt.merge $docs.one.w.clean.tgt
-    mv $docs2.one..clean.align.merge $docs.one.w.clean.align
-    python ppmergeaz $docs.one. .clean.src
-    python ppmergeaz $docs.one. .clean.tgt
-    python ppmergeaz $docs.one. .clean.align
-```
-
-now we handle the case where webdomains start with non alphabit letter with either prefix "http://" or "http://www."
-```
-    python ppgetonedocuothers $docs
-    python ppgetonesentothers $vecalign
-    python ppparaclean $docs.notaztwo $vecalign.notaztwo 
-    python ppdecobase64 $docs.notaztwo.clean $vecalign.notaztwo.clean
-```
-after we finished splitting and cleaning the data in parallel we now merge the data and change the format using the following scripts
-```
-    ./add.sh src
-    ./add.sh tgt
-    ./add.sh align
-
-    python ppgetparasent all.src all.tgt all.align
-    python pponelinefmt all.src.parasent
-    python pponelinefmt all.tgt.parasent
-    python ppuniq all.src.parasent.oneline all.tgt.parasent.oneline
-
-    python pprandom all.src.parasent.oneline.uniq all.tgt.parasent.oneline.uniq
-
-    python pponelinefmtrec all.src.parasent.oneline.uniq.train
-    python pponelinefmtrec all.tgt.parasent.oneline.uniq.train
-    python pponelinefmtrec all.src.parasent.oneline.uniq.dev
-    python pponelinefmtrec all.tgt.parasent.oneline.uniq.dev
-    python pponelinefmtrec all.src.parasent.oneline.uniq.test
-    python pponelinefmtrec all.tgt.parasent.oneline.uniq.test
-```
 
 
 ## training Settings
