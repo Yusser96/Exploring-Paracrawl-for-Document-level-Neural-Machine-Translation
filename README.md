@@ -43,7 +43,7 @@ the scripts are desined to runn in parallel.
 
 * Clean the Data:
 
-the final data will have the following name "all.src.parasent.oneline.uniq.[train/test/dev].multiline.tokclean.langid"
+the final data will have the following name "all.src.parasent.oneline.uniq.[train/test/dev].multiline.tokclean.langid.all"
 ```
     cd data_scripts
     
