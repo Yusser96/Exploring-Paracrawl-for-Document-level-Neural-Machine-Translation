@@ -47,6 +47,8 @@ the final data will have the following name "all.src.parasent.oneline.uniq.[trai
 ```
     cd data_scripts
     
+    pip install langid
+    
     bash clean_data.sh
 ```
 
