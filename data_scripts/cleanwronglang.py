@@ -1,6 +1,5 @@
 import langid
 import sys
-import nltk
 
 
 def mread(file):
