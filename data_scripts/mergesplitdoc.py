@@ -11,8 +11,8 @@ def mread(file):
 
 n = 50
 
-fos=open(sys.argv[1]+'.all','w',encoding='UTF8')    
-fot=open(sys.argv[2]+'.all','w',encoding='UTF8')
+fos=open(sys.argv[1]+'.tokclean.langid.all','w',encoding='UTF8')    
+fot=open(sys.argv[2]+'.tokclean.langid.all','w',encoding='UTF8')
 
 for i in range(1,n+1):
     ls=mread(sys.argv[1]+f'.{i}.'+sys.argv[3])
