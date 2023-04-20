@@ -15,8 +15,8 @@ Before running the scripts, please install fairseq dependencies by:
 ```
     pip install --editable .
 ```
-Please also follow the readmes under folder raw_data and mbart.cc25 to download raw data and pretrained model.
-(Notes: Our models were trained on 4 GPUs. If you trained them on 2 GPUs, in theory you could double the number for argument --update-freq. However, we haven't tested such settings.)
+Please also follow the readme under folder raw_data to download raw data.
+
 
 ## Data Extraction
 
@@ -33,7 +33,6 @@ for re-extracting the data you can follow the instruction below:
 
 * Extract the Data:
 
-the scripts are desined to runn in parallel. 
 
 ```
     cd data_scripts
@@ -43,7 +42,7 @@ the scripts are desined to runn in parallel.
 
 * Clean the Data:
 
-the final data will have the following name "all.src.parasent.oneline.uniq.[train/test/dev].multiline.tokclean.langid.all"
+
 ```
     cd data_scripts
     
